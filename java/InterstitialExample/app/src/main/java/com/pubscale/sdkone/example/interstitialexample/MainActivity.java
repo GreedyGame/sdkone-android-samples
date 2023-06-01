@@ -1,19 +1,15 @@
 package com.pubscale.sdkone.example.interstitialexample;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.pubscale.sdkone.core.AppConfig;
-import com.pubscale.sdkone.core.GreedyGameAds;
-import com.pubscale.sdkone.core.interfaces.GreedyGameAdsEventsListener;
+import com.pubscale.sdkone.core.app_open_ads.general.GGAppOpenAds;
 import com.pubscale.sdkone.core.interstitial.general.GGInterstitialAd;
 import com.pubscale.sdkone.core.interstitial.general.GGInterstitialEventsListener;
 import com.pubscale.sdkone.core.models.general.AdErrors;
-import com.pubscale.sdkone.core.models.general.InitErrors;
 import com.pubscale.sdkone.example.interstitialexample.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        GGAppOpenAds.INSTANCE.setShouldShowOnAppMovedToForeground(false);
 
         binding.btnLoad.setOnClickListener(v -> {
             loadInterstitialAd();
@@ -36,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private GGInterstitialAd mAd = null;
+
     private void loadInterstitialAd() {
         mAd = new GGInterstitialAd(this, "float-13569");
         mAd.addListener(new GGInterstitialEventsListener() {
@@ -47,11 +45,13 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onAdLoadFailed(@NonNull AdErrors adErrors) {
+                mAd.removeListener(this);
                 binding.tvStatus.setText("Ad Load Failed - " + adErrors.name());
             }
 
             @Override
             public void onAdShowFailed() {
+                mAd.removeListener(this);
                 binding.tvStatus.setText("Ad Show Failed");
             }
 
