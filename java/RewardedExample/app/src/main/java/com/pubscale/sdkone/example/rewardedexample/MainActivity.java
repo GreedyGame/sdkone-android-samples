@@ -6,6 +6,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.pubscale.sdkone.core.app_open_ads.general.GGAppOpenAds;
 import com.pubscale.sdkone.core.models.general.AdErrors;
 import com.pubscale.sdkone.core.rewarded_ad.general.GGRewardedAd;
 import com.pubscale.sdkone.core.rewarded_ad.general.GGRewardedAdsEventListener;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        GGAppOpenAds.INSTANCE.setShouldShowOnAppMovedToForeground(false);
 
         binding.btnLoad.setOnClickListener(v -> {
             loadRewardedAd();
