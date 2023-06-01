@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">AppOpenExample</string>
+    <string name="sdkx_app_id">84443675</string>
+    <string name="app_open_ads_sample">App Open Ads Sample</string>
+    <string name="show_app_open_ads_on_app_moved_to_foreground">Show app open ads on app moved to foreground</string>
+    <string name="note_enabling_this_will_show_ads_whenever_the_app_comes_to_foreground_from_background_try_minimizing_the_app_and_opening_it_again_to_test_this_flow">Note: Enabling this will show ads whenever the app comes to foreground from background. Try minimizing the app and opening it again to test this flow.</string>
+</resources>
