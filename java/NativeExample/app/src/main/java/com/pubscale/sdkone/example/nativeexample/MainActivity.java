@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public float dpToPx(final Context context, final float dp) {
+    private float dpToPx(final Context context, final float dp) {
         return dp * context.getResources().getDisplayMetrics().density;
     }
 }

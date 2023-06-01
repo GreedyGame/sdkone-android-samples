@@ -1,5 +1,6 @@
 package com.pubscale.sdkone.example.bannerexample;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -31,7 +32,9 @@ public class MainActivity extends AppCompatActivity {
     private void loadBannerAd() {
         binding.tvStatus.setText("Ad Loading..");
         binding.adView.setUnitId("float-13568"); //Your Ad Unit ID here
-        binding.adView.setAdsMaxHeight(250); //Value is in pixels, not in dp
+        binding.adView.setAdsMaxHeight(
+                (int) dpToPx(this, 300) //Value is in pixels, not in dp
+        );
 
         binding.adView.loadAd(new AdLoadCallback() {
             @Override
@@ -60,5 +63,9 @@ public class MainActivity extends AppCompatActivity {
                 binding.tvStatus.setText("Ad ready for refresh");
             }
         });
+    }
+
+    public float dpToPx(final Context context, final float dp) {
+        return dp * context.getResources().getDisplayMetrics().density;
     }
 }
