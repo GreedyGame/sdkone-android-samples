@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //Disabling auto app open ads
         GGAppOpenAds.INSTANCE.setShouldShowOnAppMovedToForeground(false);
 
         binding.btnLoad.setOnClickListener(v -> {
