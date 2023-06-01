@@ -53,11 +53,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAdLoadFailed(@NonNull AdErrors adErrors) {
                 binding.tvStatus.setText("Ad Load Failed - " + adErrors.name());
+
+                //Remove listener to prevent memory leaks
+                mAd.removeListener(this);
             }
 
             @Override
             public void onAdShowFailed() {
                 binding.tvStatus.setText("Ad Show Failed");
+
+                //Remove listener to prevent memory leaks
+                mAd.removeListener(this);
             }
 
             @Override
