@@ -15,5 +15,5 @@ dependencyResolutionManagement {
         }
     }
 }
-rootProject.name = "Interstitial Example"
+rootProject.name = "InterstitialExample"
 include ':app'
