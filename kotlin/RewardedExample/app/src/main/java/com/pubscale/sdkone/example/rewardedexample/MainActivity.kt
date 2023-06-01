@@ -18,53 +18,58 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //Disabling auto app open ads
         GGAppOpenAds.INSTANCE.shouldShowOnAppMovedToForeground = false
 
-        binding.btnLoad.setOnClickListener { loadRewardedAd() }
-        binding.btnShow.setOnClickListener { showAd() }
+        with(binding) {
+            btnLoad.setOnClickListener { loadRewardedAd() }
+            btnShow.setOnClickListener { showAd() }
+        }
     }
 
     private var mAd: GGRewardedAd = GGRewardedAd(this, "float-13571")
 
     private fun loadRewardedAd() {
-        mAd.addListener(object : GGRewardedAdsEventListener {
-            override fun onReward() {
-                Toast.makeText(this@MainActivity, "Reward given", Toast.LENGTH_SHORT).show()
-                binding.tvStatus.text = "Rewarded"
-            }
+        with(binding) {
+            mAd.addListener(object : GGRewardedAdsEventListener {
+                override fun onReward() {
+                    Toast.makeText(this@MainActivity, "Reward given", Toast.LENGTH_SHORT).show()
+                    tvStatus.text = "Rewarded"
+                }
 
-            override fun onAdLoaded() {
-                binding.tvStatus.text = "Ad Loaded"
-                binding.btnShow.isEnabled = true
-            }
+                override fun onAdLoaded() {
+                    tvStatus.text = "Ad Loaded"
+                    btnShow.isEnabled = true
+                }
 
-            override fun onAdLoadFailed(adErrors: AdErrors) {
-                binding.tvStatus.text = "Ad Load Failed - " + adErrors.name
+                override fun onAdLoadFailed(adErrors: AdErrors) {
+                    tvStatus.text = "Ad Load Failed - " + adErrors.name
 
-                //Remove listener to prevent memory leaks
-                mAd.removeListener(this)
-            }
+                    //Remove listener to prevent memory leaks
+                    mAd.removeListener(this)
+                }
 
-            override fun onAdShowFailed() {
-                binding.tvStatus.text = "Ad Show Failed"
+                override fun onAdShowFailed() {
+                    tvStatus.text = "Ad Show Failed"
 
-                //Remove listener to prevent memory leaks
-                mAd.removeListener(this)
-            }
+                    //Remove listener to prevent memory leaks
+                    mAd.removeListener(this)
+                }
 
-            override fun onAdOpened() {
-                Toast.makeText(this@MainActivity, "Ad Opened", Toast.LENGTH_SHORT).show()
-                binding.tvStatus.text = "Ad Opened"
-            }
+                override fun onAdOpened() {
+                    Toast.makeText(this@MainActivity, "Ad Opened", Toast.LENGTH_SHORT).show()
+                    tvStatus.text = "Ad Opened"
+                }
 
-            override fun onAdClosed() {
-                binding.tvStatus.text = "Ad Closed"
-                binding.btnShow.isEnabled = false
+                override fun onAdClosed() {
+                    tvStatus.text = "Ad Closed"
+                    btnShow.isEnabled = false
 
-                //Remove listener to prevent memory leaks
-                mAd.removeListener(this)
-            }
-        })
+                    //Remove listener to prevent memory leaks
+                    mAd.removeListener(this)
+                }
+            })
+        }
 
         //Load ad after adding a listener
         mAd.loadAd()
