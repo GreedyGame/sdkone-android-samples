@@ -1,6 +1,8 @@
 package com.pubscale.sdkone.example.recyclerviewadadapterexample;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,12 +30,20 @@ public class MainActivity extends AppCompatActivity {
         RVAdapter rvAdapter = new RVAdapter(); //Recycler view Adapter
         rvAdapter.submitList(list); // Submit data list to the adapter
 
+        View adView = LayoutInflater.from(this)
+                .inflate(
+                        R.layout.recycler_ad_view, //Custom layout for adview with GGAdview (with id ad_view)
+                        binding.recyclerView, //Recycler view
+                        false
+                );
+
         //SDKOne's adapter for auto ads
         RecyclerViewAdAdapter recyclerViewAdAdapter =
                 new RecyclerViewAdAdapter.Builder(this)
                         .setAdapter(rvAdapter) //Pass recyclerview adapter here
                         .setRepeatInterval(10) //Set count of items after which you must see an ad
                         .setFloatUnitId("float-13582") //Ad unit id
+                        .setAdView(adView)
                         .build(); // build the adapter
 
         binding.recyclerView.setAdapter(recyclerViewAdAdapter); //set the adapter to recycler view
