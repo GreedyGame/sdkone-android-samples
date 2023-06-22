@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         //Disabling auto app open ads
-        GGAppOpenAds.INSTANCE.setShouldShowOnAppMovedToForeground(false);
+        GGAppOpenAds.setShouldShowOnAppMovedToForeground(false);
 
         binding.btnLoad.setOnClickListener(v -> {
             loadRewardedAd();
@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadRewardedAd() {
         mAd = new GGRewardedAd(this, "float-13571");
+
+        binding.tvStatus.setText("Ad Loading");
 
         mAd.addListener(new GGRewardedAdsEventListener() {
             @Override
