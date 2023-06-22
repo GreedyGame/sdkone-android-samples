@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //Disabling auto app open ads
-        GGAppOpenAds.INSTANCE.shouldShowOnAppMovedToForeground = false
+        GGAppOpenAds.setShouldShowOnAppMovedToForeground(false)
 
         with(binding) {
             btnLoad.setOnClickListener { loadNativeAd() }
