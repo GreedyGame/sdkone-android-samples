@@ -3,6 +3,8 @@ SDKOne is the latest SDK built by [Pubscale](https://pubscale.com/) to maximize 
 
 This repository contains open source examples and developer resources for SDKOne integration.
 
+SDKOne version [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.pubscale.sdkone/core/badge.svg)]
+
 # Documentation
 Checkout the respective documentations below.
 - [Java documentation](https://drive.google.com/file/d/1ex9qy8qnhTiobPddkeJ00-pe_YDAOkQx/view?usp=sharing)
