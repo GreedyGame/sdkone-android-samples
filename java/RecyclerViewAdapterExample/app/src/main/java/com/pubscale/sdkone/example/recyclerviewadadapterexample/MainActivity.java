@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
                         .setAdapter(rvAdapter) //Pass recyclerview adapter here
                         .setRepeatInterval(10) //Set count of items after which you must see an ad
                         .setFloatUnitId("float-13582") //Ad unit id
-                        .setAdLayoutId(R.layout.recycler_ad_view)
+                        .setAdLayoutId(R.layout.recycler_ad_view) // Ad view layout id
                         .build(); // build the adapter
 
         binding.recyclerView.setAdapter(recyclerViewAdAdapter); //set the adapter to recycler view
