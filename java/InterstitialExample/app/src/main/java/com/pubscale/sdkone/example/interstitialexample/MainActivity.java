@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         //Disabling auto app open ads
-        GGAppOpenAds.INSTANCE.setShouldShowOnAppMovedToForeground(false);
+        GGAppOpenAds.setShouldShowOnAppMovedToForeground(false);
 
         binding.btnLoad.setOnClickListener(v -> {
             loadInterstitialAd();
@@ -37,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadInterstitialAd() {
         mAd = new GGInterstitialAd(this, "float-13569");
+
+        binding.tvStatus.setText("Ad Loading");
+
         mAd.addListener(new GGInterstitialEventsListener() {
             @Override
             public void onAdLoaded() {
