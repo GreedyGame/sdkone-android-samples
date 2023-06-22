@@ -3,11 +3,11 @@ SDKOne is the latest SDK built by [Pubscale](https://pubscale.com/) to maximize 
 
 This repository contains open source examples and developer resources for SDKOne integration.
 
-SDKOne version [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.pubscale.sdkone/core/badge.svg)]
+SDKOne version ![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.pubscale.sdkone/core/badge.svg)
 
 # Documentation
 Checkout the documentation below.
-- [Documentation](https://drive.google.com/file/d/1qFkGGWteNKJfmHsHm9dVWjNoQZa1SKc_/view?usp=sharing)
+- [Documentation](https://drive.google.com/file/d/1DnyZNbUbO-K-mxhH5J-LSOJIML1MAOKE/view?usp=sharing)
 
 # Example Apps
 - AppOpen: [Java](https://github.com/GreedyGame/sdkone-android-samples/tree/main/java/AppOpenExample), [Kotlin](https://github.com/GreedyGame/sdkone-android-samples/tree/main/kotlin/AppOpenExample)
