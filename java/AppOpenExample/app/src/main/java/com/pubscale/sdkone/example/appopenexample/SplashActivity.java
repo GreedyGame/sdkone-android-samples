@@ -26,7 +26,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void loadAppOpenAds() {
-        GGAppOpenAds.INSTANCE.setShouldShowOnAppMovedToForeground(true);
+        GGAppOpenAds.setShouldShowOnAppMovedToForeground(true);
 
         GGAppOpenAds.addListener(new AppOpenAdsEventsListener() {
             @Override
@@ -36,13 +36,13 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onAdLoadFailed(@NonNull AdErrors adErrors) {
-                GGAppOpenAds.INSTANCE.removeListener(this);
+                GGAppOpenAds.removeListener(this);
                 openMainActivity();
             }
 
             @Override
             public void onAdShowFailed() {
-                GGAppOpenAds.INSTANCE.removeListener(this);
+                GGAppOpenAds.removeListener(this);
                 openMainActivity();
             }
 
@@ -53,10 +53,12 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onAdClosed() {
-                GGAppOpenAds.INSTANCE.removeListener(this);
+                GGAppOpenAds.removeListener(this);
                 openMainActivity();
             }
         });
+
+        GGAppOpenAds.loadAd("float-13570");
     }
 
     private void openMainActivity() {
