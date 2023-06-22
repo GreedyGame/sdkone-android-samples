@@ -7,8 +7,7 @@ SDKOne version [![Maven Central](https://maven-badges.herokuapp.com/maven-centra
 
 # Documentation
 Checkout the respective documentations below.
-- [Java documentation](https://drive.google.com/file/d/1ex9qy8qnhTiobPddkeJ00-pe_YDAOkQx/view?usp=sharing)
-- [Kotlin documentation](https://drive.google.com/file/d/1GLEQGYXD5GJ-Ffei_YuUsby6DMXjZ535/view?usp=sharing)
+- [Documentation](https://drive.google.com/file/d/1qFkGGWteNKJfmHsHm9dVWjNoQZa1SKc_/view?usp=sharing)
 
 # Example Apps
 - AppOpen: [Java](https://github.com/GreedyGame/sdkone-android-samples/tree/main/java/AppOpenExample), [Kotlin](https://github.com/GreedyGame/sdkone-android-samples/tree/main/kotlin/AppOpenExample)
@@ -16,3 +15,4 @@ Checkout the respective documentations below.
 - Interstitial: [Java](https://github.com/GreedyGame/sdkone-android-samples/tree/main/java/InterstitialExample), [Kotlin](https://github.com/GreedyGame/sdkone-android-samples/tree/main/kotlin/InterstitialExample)
 - Rewarded: [Java](https://github.com/GreedyGame/sdkone-android-samples/tree/main/java/RewardedExample), [Kotlin](https://github.com/GreedyGame/sdkone-android-samples/tree/main/kotlin/RewardedExample)
 - Native: [Java](https://github.com/GreedyGame/sdkone-android-samples/tree/main/java/NativeExample), [Kotlin](https://github.com/GreedyGame/sdkone-android-samples/tree/main/kotlin/NativeExample)
+- RecyclerViewAdAdapter: [Java](https://github.com/GreedyGame/sdkone-android-samples/tree/main/java/RecyclerViewAdapterExample), [Kotlin](https://github.com/GreedyGame/sdkone-android-samples/tree/main/kotlin/RecyclerViewAdapterExample)
