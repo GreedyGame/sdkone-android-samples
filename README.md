@@ -6,7 +6,7 @@ This repository contains open source examples and developer resources for SDKOne
 SDKOne version [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.pubscale.sdkone/core/badge.svg)]
 
 # Documentation
-Checkout the respective documentations below.
+Checkout the documentation below.
 - [Documentation](https://drive.google.com/file/d/1qFkGGWteNKJfmHsHm9dVWjNoQZa1SKc_/view?usp=sharing)
 
 # Example Apps
