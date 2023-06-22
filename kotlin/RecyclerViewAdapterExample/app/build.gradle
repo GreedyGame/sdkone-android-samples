@@ -1,0 +1,64 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'com.pubscale.sdkone.example.recyclerviewadadapterexample'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.pubscale.sdkone.example.recyclerviewadadapterexample"
+        minSdk 19
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildFeatures {
+        viewBinding true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    implementation 'com.pubscale.sdkone:core:0.03-rc10'
+
+    //Dependencies for SDKOne
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation "androidx.palette:palette:1.0.0"
+    implementation "com.squareup.moshi:moshi:1.14.0"
+    implementation "com.squareup.moshi:moshi-adapters:1.14.0"
+    annotationProcessor("com.squareup.moshi:moshi-kotlin-codegen:1.14.0")
+
+    //This will Add the following Play service version to get ads from AdMob in the app.gradle file.
+    // Minimum supported version for AdMob is Play Service version 22.0.0.
+    implementation 'com.google.android.gms:play-services-ads:22.1.0'
+
+    //Optional
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
+}

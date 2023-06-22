@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<String> prepareSampleList(int size) {
         ArrayList<String> list = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            list.add("Item " + (i + 1));
+        for (int i = 1; i <= size; i++) {
+            list.add("Item " + i);
         }
         return list;
     }
