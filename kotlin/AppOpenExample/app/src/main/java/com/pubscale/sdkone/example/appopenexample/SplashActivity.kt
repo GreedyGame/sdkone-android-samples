@@ -20,28 +20,29 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun loadAppOpenAds() {
-        GGAppOpenAds.INSTANCE.shouldShowOnAppMovedToForeground = true
+        GGAppOpenAds.setShouldShowOnAppMovedToForeground(true)
         GGAppOpenAds.addListener(object : AppOpenAdsEventsListener {
             override fun onAdLoaded() {
                 GGAppOpenAds.show(this@SplashActivity)
             }
 
             override fun onAdLoadFailed(adErrors: AdErrors) {
-                GGAppOpenAds.INSTANCE.removeListener(this)
+                GGAppOpenAds.removeListener(this)
                 openMainActivity()
             }
 
             override fun onAdShowFailed() {
-                GGAppOpenAds.INSTANCE.removeListener(this)
+                GGAppOpenAds.removeListener(this)
                 openMainActivity()
             }
 
             override fun onAdOpened() {}
             override fun onAdClosed() {
-                GGAppOpenAds.INSTANCE.removeListener(this)
+                GGAppOpenAds.removeListener(this)
                 openMainActivity()
             }
         })
+        GGAppOpenAds.loadAd("float-13570")
     }
 
     private fun openMainActivity() {

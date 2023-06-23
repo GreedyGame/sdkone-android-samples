@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //Disabling auto app open ads
-        GGAppOpenAds.INSTANCE.shouldShowOnAppMovedToForeground = false
+        GGAppOpenAds.setShouldShowOnAppMovedToForeground(false)
 
         with(binding) {
             btnLoad.setOnClickListener { loadRewardedAd() }
@@ -31,6 +31,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadRewardedAd() {
         with(binding) {
+            tvStatus.text = "Ad Loading"
+
             mAd.addListener(object : GGRewardedAdsEventListener {
                 override fun onReward() {
                     Toast.makeText(this@MainActivity, "Reward given", Toast.LENGTH_SHORT).show()

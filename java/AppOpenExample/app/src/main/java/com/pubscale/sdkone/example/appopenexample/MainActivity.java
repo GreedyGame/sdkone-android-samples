@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         binding.switchAppOpen.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            GGAppOpenAds.INSTANCE.setShouldShowOnAppMovedToForeground(isChecked);
+            GGAppOpenAds.setShouldShowOnAppMovedToForeground(isChecked);
         });
     }
 }

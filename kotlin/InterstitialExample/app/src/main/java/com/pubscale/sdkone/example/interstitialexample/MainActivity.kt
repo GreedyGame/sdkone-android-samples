@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //Disabling auto app open ads
-        GGAppOpenAds.INSTANCE.shouldShowOnAppMovedToForeground = false
+        GGAppOpenAds.setShouldShowOnAppMovedToForeground(false)
 
         with(binding) {
             btnLoad.setOnClickListener { loadInterstitialAd() }
@@ -31,6 +31,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadInterstitialAd() {
         with(binding){
+            tvStatus.text = "Ad Loading"
+
             mAd.addListener(object : GGInterstitialEventsListener {
                 override fun onAdLoaded() {
                     tvStatus.text = "Ad Loaded"
