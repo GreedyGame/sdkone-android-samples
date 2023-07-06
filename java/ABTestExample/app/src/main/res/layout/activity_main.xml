@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:constraint_referenced_ids="interstitialTitle,interstitialAdStatus"
-        app:flow_horizontalGap="16dp"
+        app:flow_horizontalGap="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appOpenLabel" />
@@ -86,7 +86,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:constraint_referenced_ids="rewardedTitle,rewardedAdStatus"
-        app:flow_horizontalGap="16dp"
+        app:flow_horizontalGap="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/interstitialButtonFlow" />
@@ -156,7 +156,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:constraint_referenced_ids="nativeTitle,nativeAdStatus"
-        app:flow_horizontalGap="16dp"
+        app:flow_horizontalGap="10dp"
         app:layout_constraintBottom_toTopOf="@id/nativeAd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -188,7 +188,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:constraint_referenced_ids="bannerTitle,bannerAdStatus"
-        app:flow_horizontalGap="16dp"
+        app:flow_horizontalGap="10dp"
         app:layout_constraintBottom_toTopOf="@id/bannerAd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

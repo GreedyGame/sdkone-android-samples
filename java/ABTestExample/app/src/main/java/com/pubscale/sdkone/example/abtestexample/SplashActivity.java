@@ -3,6 +3,7 @@ package com.pubscale.sdkone.example.abtestexample;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.pubscale.sdkone.example.abtestexample.databinding.ActivitySplashBinding;
 
 public class SplashActivity extends AppCompatActivity {
@@ -12,7 +13,6 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = ActivitySplashBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 

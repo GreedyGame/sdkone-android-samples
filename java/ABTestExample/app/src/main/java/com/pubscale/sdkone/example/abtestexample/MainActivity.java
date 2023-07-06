@@ -2,18 +2,12 @@ package com.pubscale.sdkone.example.abtestexample;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.LoadAdError;
-import com.pubscale.sdkone.core.adview.general.AdLoadCallback;
-import com.pubscale.sdkone.core.adview.general.GGAdview;
-import com.pubscale.sdkone.core.models.general.AdErrors;
+import com.pubscale.sdkone.example.abtestexample.ad_formats.Banner;
+import com.pubscale.sdkone.example.abtestexample.ad_formats.Native;
 import com.pubscale.sdkone.example.abtestexample.databinding.ActivityMainBinding;
+import com.pubscale.sdkone.example.abtestexample.event_listener.BannerNativeAdEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,96 +23,82 @@ public class MainActivity extends AppCompatActivity {
         binding.bannerAdLoadButton.setOnClickListener(view -> {
             loadBannerAd();
         });
+
+        binding.nativeAdLoadButton.setOnClickListener(view -> {
+            loadNativeAd();
+        });
     }
 
     private void loadBannerAd() {
-//        loadSdkOneBannerAd();
-//        loadAdmobBannerAd();
-    }
-
-    private void loadAdmobBannerAd() {
-        binding.bannerAdStatus.setText("Loading...");
-
-        AdView adView = new AdView(this);
-        binding.bannerAd.removeAllViews();
-        binding.bannerAd.addView(adView);
-        adView.setAdSize(AdSize.BANNER);
-        adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
-
-        adView.setAdListener(new AdListener() {
+        BannerNativeAdEventListener bannerNativeAdEventListener = new BannerNativeAdEventListener() {
             @Override
-            public void onAdLoaded() {
-                super.onAdLoaded();
-                binding.bannerAdStatus.setText("Loaded");
+            public void onAdLoading() {
+                binding.bannerAdStatus.setText("Loading...");
             }
 
-            @Override
-            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                super.onAdFailedToLoad(loadAdError);
-                binding.bannerAdStatus.setText("Load Failed " + loadAdError.getMessage());
-            }
-
-            @Override
-            public void onAdImpression() {
-                super.onAdImpression();
-                binding.bannerAdStatus.setText("Impression");
-            }
-
-            @Override
-            public void onAdClicked() {
-                super.onAdClicked();
-                binding.bannerAdStatus.setText("Clicked");
-            }
-
-            @Override
-            public void onAdOpened() {
-                super.onAdOpened();
-                binding.bannerAdStatus.setText("UI opened");
-            }
-
-            @Override
-            public void onAdClosed() {
-                super.onAdClosed();
-                binding.bannerAdStatus.setText("UI closed");
-            }
-        });
-
-        adView.loadAd(new AdRequest.Builder().build());
-    }
-
-    private void loadSdkOneBannerAd() {
-        binding.bannerAdStatus.setText("Loading...");
-
-        GGAdview ggAdview = new GGAdview(this);
-        binding.bannerAd.removeAllViews();
-        binding.bannerAd.addView(ggAdview);
-        ggAdview.setUnitId("float-13568");
-
-        ggAdview.loadAd(new AdLoadCallback() {
             @Override
             public void onAdLoaded() {
                 binding.bannerAdStatus.setText("Loaded");
             }
 
             @Override
-            public void onAdLoadFailed(@NonNull AdErrors adErrors) {
-                binding.bannerAdStatus.setText("Load Failed " + adErrors.name());
+            public void onAdLoadFailed() {
+                binding.bannerAdStatus.setText("Failed");
             }
 
             @Override
             public void onUiiOpened() {
-                binding.bannerAdStatus.setText("UI opened");
+                binding.bannerAdStatus.setText("Opened");
             }
 
             @Override
             public void onUiiClosed() {
-                binding.bannerAdStatus.setText("UI closed");
+                binding.bannerAdStatus.setText("Closed");
             }
 
             @Override
             public void onReadyForRefresh() {
-                binding.bannerAdStatus.setText("Ready For refresh");
+                binding.bannerAdStatus.setText("Ready for refresh");
             }
-        });
+        };
+
+        Banner.getInstance(bannerNativeAdEventListener).loadAd(this, binding.bannerAd);
+    }
+
+    private void loadNativeAd() {
+        BannerNativeAdEventListener bannerNativeAdEventListener = new BannerNativeAdEventListener() {
+            @Override
+            public void onAdLoading() {
+                binding.nativeAdStatus.setText("Loading...");
+            }
+
+            @Override
+            public void onAdLoaded() {
+                binding.nativeAdStatus.setText("Loaded");
+            }
+
+            @Override
+            public void onAdLoadFailed() {
+                binding.nativeAdStatus.setText("Failed");
+            }
+
+            @Override
+            public void onUiiOpened() {
+                binding.nativeAdStatus.setText("Opened");
+            }
+
+            @Override
+            public void onUiiClosed() {
+                binding.nativeAdStatus.setText("Closed");
+            }
+
+            @Override
+            public void onReadyForRefresh() {
+                binding.nativeAdStatus.setText("Ready for refresh");
+            }
+        };
+
+        Native.getInstance(bannerNativeAdEventListener).loadAd(this, binding.nativeAd);
     }
 }
+
