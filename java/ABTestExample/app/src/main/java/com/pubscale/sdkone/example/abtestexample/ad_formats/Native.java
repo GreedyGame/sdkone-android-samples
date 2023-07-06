@@ -3,6 +3,7 @@ package com.pubscale.sdkone.example.abtestexample.ad_formats;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -34,7 +35,7 @@ public class Native {
     }
 
     public void loadAd(Context context, ViewGroup adContainer) {
-        switch (remoteConfig.adProvider()) {
+        switch (remoteConfig.getAdProvider()) {
             case "admob" : {
                 loadAdmobNativeAd(context, adContainer);
                 break;

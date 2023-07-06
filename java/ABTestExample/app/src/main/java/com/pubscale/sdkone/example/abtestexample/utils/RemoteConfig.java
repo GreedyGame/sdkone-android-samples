@@ -13,12 +13,13 @@ public class RemoteConfig {
     private RemoteConfig() {
         mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
         FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
-                .setMinimumFetchIntervalInSeconds(3600)
+                .setMinimumFetchIntervalInSeconds(60)
                 .build();
         mFirebaseRemoteConfig.setConfigSettingsAsync(configSettings);
         Map<String, Object> defaults = new HashMap<>();
         defaults.put("ad_provider", "sdkone");
         mFirebaseRemoteConfig.setDefaultsAsync(defaults);
+        mFirebaseRemoteConfig.fetchAndActivate();
     }
 
     public static synchronized RemoteConfig getInstance() {
@@ -27,7 +28,7 @@ public class RemoteConfig {
         return remoteConfig;
     }
 
-    public String adProvider() {
+    public String getAdProvider() {
         return mFirebaseRemoteConfig.getString("ad_provider");
     }
 }
