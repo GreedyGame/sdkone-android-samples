@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/appOpenLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="40dp"
+        android:labelFor="@id/switchAppOpen"
+        android:text="Show app open ads on app moved to foreground"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@id/switchAppOpen"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/switchAppOpen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:checked="true"
+        app:layout_constraintBottom_toBottomOf="@id/appOpenLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/appOpenLabel"
+        app:layout_constraintTop_toTopOf="@id/appOpenLabel" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/interstitialFlow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:constraint_referenced_ids="interstitialTitle,interstitialAdStatus"
+        app:flow_horizontalGap="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appOpenLabel" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/interstitialTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text="Interstitial Ad" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/interstitialAdStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="..." />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/interstitialButtonFlow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="interstitialLoadButton,interstitialShowButton"
+        app:flow_horizontalGap="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/interstitialFlow" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/interstitialLoadButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Load Ad"
+        app:cornerRadius="7dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/interstitialShowButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:text="Show Ad"
+        app:cornerRadius="7dp" />
+
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/rewardedFlow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:constraint_referenced_ids="rewardedTitle,rewardedAdStatus"
+        app:flow_horizontalGap="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/interstitialButtonFlow" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/rewardedTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text="Rewarded Ad" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/rewardedAdStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="..." />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/rewardedButtonFlow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="rewardedLoadButton,rewardedShowButton"
+        app:flow_horizontalGap="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rewardedFlow" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/rewardedLoadButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Load Ad"
+        app:cornerRadius="7dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/rewardedShowButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:text="Show Ad"
+        app:cornerRadius="7dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/nativeAdLoadButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Load Native Ad"
+        app:cornerRadius="7dp"
+        app:layout_constraintEnd_toEndOf="@id/rewardedButtonFlow"
+        app:layout_constraintStart_toStartOf="@id/rewardedButtonFlow"
+        app:layout_constraintTop_toBottomOf="@id/rewardedButtonFlow" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/bannerAdLoadButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Load Banner Ad"
+        app:cornerRadius="7dp"
+        app:layout_constraintEnd_toEndOf="@id/rewardedButtonFlow"
+        app:layout_constraintStart_toStartOf="@id/rewardedButtonFlow"
+        app:layout_constraintTop_toBottomOf="@id/nativeAdLoadButton" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/nativeFlow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="nativeTitle,nativeAdStatus"
+        app:flow_horizontalGap="16dp"
+        app:layout_constraintBottom_toTopOf="@id/nativeAd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/nativeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text="Native Ad" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/nativeAdStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="..." />
+
+    <FrameLayout
+        android:id="@+id/nativeAd"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="#C1E8FF"
+        app:layout_constraintBottom_toTopOf="@id/bannerFlow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/bannerFlow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="bannerTitle,bannerAdStatus"
+        app:flow_horizontalGap="16dp"
+        app:layout_constraintBottom_toTopOf="@id/bannerAd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/bannerTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Banner Ad" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/bannerAdStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="..." />
+
+    <FrameLayout
+        android:id="@+id/bannerAd"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="#C1E8FF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
