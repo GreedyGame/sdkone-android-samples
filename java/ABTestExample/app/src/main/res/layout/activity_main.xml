@@ -58,8 +58,8 @@
         android:id="@+id/interstitialButtonFlow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="interstitialLoadButton,interstitialShowButton"
-        app:flow_horizontalGap="16dp"
+        app:constraint_referenced_ids="interstitialLoadButton,interstitialShowButton,goToNextActivityButton"
+        app:flow_horizontalGap="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/interstitialFlow" />
@@ -76,9 +76,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:enabled="false"
-        android:text="Show Ad"
+        android:text="Next Screen"
         app:cornerRadius="7dp" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/goToNextActivityButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next Screen"
+        app:cornerRadius="7dp" />
 
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/rewardedFlow"
@@ -109,7 +115,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:constraint_referenced_ids="rewardedLoadButton,rewardedShowButton"
-        app:flow_horizontalGap="16dp"
+        app:flow_horizontalGap="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rewardedFlow" />

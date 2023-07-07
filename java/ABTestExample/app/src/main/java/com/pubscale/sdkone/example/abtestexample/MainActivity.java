@@ -1,5 +1,6 @@
 package com.pubscale.sdkone.example.abtestexample;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -34,11 +35,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
         binding.interstitialLoadButton.setOnClickListener(view -> {
-            loadInterstitialAd();
+            loadInterstitialAd(false);
         });
 
         binding.interstitialShowButton.setOnClickListener(view -> {
             showInterstitialAd();
+        });
+
+        binding.goToNextActivityButton.setOnClickListener(view -> {
+            loadInterstitialAd(true);
         });
 
         binding.rewardedLoadButton.setOnClickListener(view -> {
@@ -123,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private Interstitial interstitialAd = null;
-    private void loadInterstitialAd() {
+    private void loadInterstitialAd(boolean goToNextActivity) {
         InterstitialEventListener interstitialEventListener = new InterstitialEventListener() {
             @Override
             public void onAdLoading() {
@@ -133,18 +138,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAdLoaded() {
                 binding.interstitialAdStatus.setText("Loaded");
-                binding.interstitialShowButton.setEnabled(true);
+                if(goToNextActivity) showInterstitialAd();
+                else binding.interstitialShowButton.setEnabled(true);
             }
 
             @Override
             public void onAdLoadFailed() {
                 binding.interstitialAdStatus.setText("Load failed");
+                if(goToNextActivity) proceedToNextActivity();
             }
 
             @Override
             public void onAdShowFailed() {
                 binding.interstitialAdStatus.setText("Show failed");
                 binding.interstitialShowButton.setEnabled(false);
+                if(goToNextActivity) proceedToNextActivity();
             }
 
             @Override
@@ -156,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAdClosed() {
                 binding.interstitialAdStatus.setText("Closed");
+                if(goToNextActivity) proceedToNextActivity();
             }
         };
 
@@ -166,6 +175,10 @@ public class MainActivity extends AppCompatActivity {
     private void showInterstitialAd() {
         if(interstitialAd == null) return;
         interstitialAd.showAd(this);
+    }
+
+    private void proceedToNextActivity() {
+        startActivity(new Intent(this, DummyActivity.class));
     }
 
     private Rewarded rewardedAd = null;
