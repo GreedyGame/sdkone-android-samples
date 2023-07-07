@@ -1,13 +1,18 @@
 package com.pubscale.sdkone.example.abtestexample;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.pubscale.sdkone.example.abtestexample.ad_formats.Banner;
+import com.pubscale.sdkone.example.abtestexample.ad_formats.Interstitial;
 import com.pubscale.sdkone.example.abtestexample.ad_formats.Native;
+import com.pubscale.sdkone.example.abtestexample.ad_formats.Rewarded;
 import com.pubscale.sdkone.example.abtestexample.databinding.ActivityMainBinding;
 import com.pubscale.sdkone.example.abtestexample.event_listener.BannerNativeAdEventListener;
+import com.pubscale.sdkone.example.abtestexample.event_listener.InterstitialEventListener;
+import com.pubscale.sdkone.example.abtestexample.event_listener.RewardedAdEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +31,22 @@ public class MainActivity extends AppCompatActivity {
 
         binding.nativeAdLoadButton.setOnClickListener(view -> {
             loadNativeAd();
+        });
+
+        binding.interstitialLoadButton.setOnClickListener(view -> {
+            loadInterstitialAd();
+        });
+
+        binding.interstitialShowButton.setOnClickListener(view -> {
+            showInterstitialAd();
+        });
+
+        binding.rewardedLoadButton.setOnClickListener(view -> {
+            loadRewardedAd();
+        });
+
+        binding.rewardedShowButton.setOnClickListener(view -> {
+            showRewardedAd();
         });
     }
 
@@ -99,6 +120,105 @@ public class MainActivity extends AppCompatActivity {
         };
 
         Native.getInstance(bannerNativeAdEventListener).loadAd(this, binding.nativeAd);
+    }
+
+    private Interstitial interstitialAd = null;
+    private void loadInterstitialAd() {
+        InterstitialEventListener interstitialEventListener = new InterstitialEventListener() {
+            @Override
+            public void onAdLoading() {
+                binding.interstitialAdStatus.setText("Loading...");
+            }
+
+            @Override
+            public void onAdLoaded() {
+                binding.interstitialAdStatus.setText("Loaded");
+                binding.interstitialShowButton.setEnabled(true);
+            }
+
+            @Override
+            public void onAdLoadFailed() {
+                binding.interstitialAdStatus.setText("Load failed");
+            }
+
+            @Override
+            public void onAdShowFailed() {
+                binding.interstitialAdStatus.setText("Show failed");
+                binding.interstitialShowButton.setEnabled(false);
+            }
+
+            @Override
+            public void onAdOpened() {
+                binding.interstitialAdStatus.setText("Opened");
+                binding.interstitialShowButton.setEnabled(false);
+            }
+
+            @Override
+            public void onAdClosed() {
+                binding.interstitialAdStatus.setText("Closed");
+            }
+        };
+
+        interstitialAd = Interstitial.getInstance(interstitialEventListener);
+        interstitialAd.loadAd(this);
+    }
+
+    private void showInterstitialAd() {
+        if(interstitialAd == null) return;
+        interstitialAd.showAd(this);
+    }
+
+    private Rewarded rewardedAd = null;
+
+    private void loadRewardedAd() {
+        RewardedAdEventListener rewardedAdEventListener = new RewardedAdEventListener() {
+            @Override
+            public void onReward() {
+                binding.rewardedAdStatus.setText("Rewarded");
+                Toast.makeText(getApplicationContext(), "Rewarded", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAdLoading() {
+                binding.rewardedAdStatus.setText("Loading...");
+            }
+
+            @Override
+            public void onAdLoaded() {
+                binding.rewardedAdStatus.setText("Loaded");
+                binding.rewardedShowButton.setEnabled(true);
+            }
+
+            @Override
+            public void onAdLoadFailed() {
+                binding.rewardedAdStatus.setText("Failed");
+            }
+
+            @Override
+            public void onAdShowFailed() {
+                binding.rewardedAdStatus.setText("Show failed");
+                binding.rewardedShowButton.setEnabled(false);
+            }
+
+            @Override
+            public void onAdOpened() {
+                binding.rewardedAdStatus.setText("Opened");
+                binding.rewardedShowButton.setEnabled(false);
+            }
+
+            @Override
+            public void onAdClosed() {
+                binding.rewardedAdStatus.setText("Closed");
+            }
+        };
+
+        rewardedAd = Rewarded.getInstance(rewardedAdEventListener);
+        rewardedAd.loadAd(this);
+    }
+
+    private void showRewardedAd() {
+        if(rewardedAd == null) return;
+        rewardedAd.showAd(this);
     }
 }
 
