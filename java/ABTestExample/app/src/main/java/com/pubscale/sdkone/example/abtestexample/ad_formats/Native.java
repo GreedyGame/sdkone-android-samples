@@ -63,6 +63,7 @@ public class Native {
     }
 
     public void loadAd(Context context, ViewGroup adContainer) {
+        eventListener.onAdLoading();
         switch (remoteConfig.getAdProvider()) {
             case "admob" : {
                 loadAdmobNativeAd(context, adContainer);
@@ -73,11 +74,11 @@ public class Native {
                 break;
             }
             default:{
+                eventListener.onAdLoadFailed();
             }
         }
     }
     private void loadAdmobNativeAd(Context context, ViewGroup adContainer) {
-        eventListener.onAdLoading();
         AdLoader adLoader = new AdLoader.Builder(context, "ca-app-pub-3940256099942544/2247696110")
                 .forNativeAd(nativeAd -> {
                     MediumAdmobTemplateBinding adView = MediumAdmobTemplateBinding.inflate(LayoutInflater.from(context), adContainer, false);
@@ -125,7 +126,6 @@ public class Native {
         adLoader.loadAd(new AdRequest.Builder().build());
     }
     private void loadSdkoneNativeAd(Context context, ViewGroup adContainer) {
-        eventListener.onAdLoading();
         GGAdview ggAdview = new GGAdview(context);
         adContainer.removeAllViews();
         adContainer.addView(ggAdview);

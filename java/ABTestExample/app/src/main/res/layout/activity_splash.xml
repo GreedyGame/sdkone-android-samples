@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:constraint_referenced_ids="img,label"
+        app:constraint_referenced_ids="img,label,appOpenFlow"
         app:flow_verticalGap="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,5 +29,28 @@
         android:layout_height="wrap_content"
         android:text="AB Test Sample"
         android:textSize="24sp" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/appOpenFlow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:constraint_referenced_ids="appOpenTv,appOpenStatus"
+        app:flow_horizontalGap="10dp"
+     />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/appOpenTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AppOpen Ad"
+        android:textSize="14sp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/appOpenStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:textSize="14sp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

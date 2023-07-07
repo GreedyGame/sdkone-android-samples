@@ -2,6 +2,7 @@ package com.pubscale.sdkone.example.abtestexample;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,32 +24,52 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void loadAppOpenAd() {
+        AppOpen appOpenAd = AppOpen.getInstance();
         AppOpenAdEventListener appOpenAdEventListener = new AppOpenAdEventListener() {
             @Override
+            public void onAdLoading() {
+                binding.appOpenStatus.setText("Loading...");
+            }
+
+            @Override
             public void onAdLoaded() {
+                binding.appOpenStatus.setText("Loaded");
+                appOpenAd.showAd(SplashActivity.this);
             }
 
             @Override
             public void onAdLoadFailed() {
+                binding.appOpenStatus.setText("Failed");
                 openMainActivity();
             }
 
             @Override
             public void onAdShowFailed() {
+                binding.appOpenStatus.setText("Show failed");
                 openMainActivity();
             }
 
             @Override
             public void onAdOpened() {
+                binding.appOpenStatus.setText("Opened");
             }
 
             @Override
             public void onAdClosed() {
+                binding.appOpenStatus.setText("Closed");
+                openMainActivity();
+            }
+
+            @Override
+            public void onAdDisabled() {
+                binding.appOpenStatus.setText("Disabled");
+                Toast.makeText(SplashActivity.this, "App open ad disabled", Toast.LENGTH_SHORT).show();
                 openMainActivity();
             }
         };
 
-        AppOpen.getInstance().setAppOpenAdEventListener(appOpenAdEventListener).loadAd(this, true);
+        appOpenAd.setAppOpenAdEventListener(appOpenAdEventListener);
+        appOpenAd.loadAd(this);
     }
 
     private void openMainActivity() {

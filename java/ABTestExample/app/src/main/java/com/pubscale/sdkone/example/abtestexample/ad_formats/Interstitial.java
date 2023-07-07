@@ -63,6 +63,7 @@ public class Interstitial {
     }
 
     public void loadAd(Context context) {
+        eventListener.onAdLoading();
         switch (remoteConfig.getAdProvider()) {
             case "admob": {
                 loadAdmobInterstitialAd(context);
@@ -73,7 +74,7 @@ public class Interstitial {
                 break;
             }
             default: {
-
+                eventListener.onAdLoadFailed();
             }
         }
     }
@@ -89,13 +90,12 @@ public class Interstitial {
                 break;
             }
             default: {
-
+                eventListener.onAdShowFailed();
             }
         }
     }
 
     private void loadAdmobInterstitialAd(Context context) {
-        eventListener.onAdLoading();
         AdRequest adRequest = new AdRequest.Builder().build();
         InterstitialAd.load(context, "ca-app-pub-3940256099942544/1033173712", adRequest, new InterstitialAdLoadCallback() {
             @Override
@@ -151,7 +151,6 @@ public class Interstitial {
     }
 
     private void loadSdkoneInterstitialAd(Context context) {
-        eventListener.onAdLoading();
         ggInterstitialAd = new GGInterstitialAd(context, "float-13569");
 
         ggInterstitialAd.addListener(new GGInterstitialEventsListener() {

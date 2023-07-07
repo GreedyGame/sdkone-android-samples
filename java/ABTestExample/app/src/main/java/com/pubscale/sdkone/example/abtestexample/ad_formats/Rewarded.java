@@ -73,6 +73,7 @@ public class Rewarded {
     }
 
     public void loadAd(Context context) {
+        eventListener.onAdLoading();
         switch (remoteConfig.getAdProvider()) {
             case "admob": {
                 loadAdmobRewardedAd(context);
@@ -83,7 +84,7 @@ public class Rewarded {
                 break;
             }
             default: {
-
+                eventListener.onAdLoadFailed();
             }
         }
     }
@@ -99,13 +100,12 @@ public class Rewarded {
                 break;
             }
             default: {
-
+                eventListener.onAdShowFailed();
             }
         }
     }
 
     private void loadAdmobRewardedAd(Context context) {
-        eventListener.onAdLoading();
         AdRequest adRequest = new AdRequest.Builder().build();
         RewardedAd.load(context, "ca-app-pub-3940256099942544/5224354917",
                 adRequest, new RewardedAdLoadCallback() {
@@ -165,7 +165,6 @@ public class Rewarded {
 
 
     private void loadSdkoneRewardedAd(Context context) {
-        eventListener.onAdLoading();
         ggRewardedAd = new GGRewardedAd(context, "float-13571");
         ggRewardedAd.addListener(new GGRewardedAdsEventListener() {
             @Override

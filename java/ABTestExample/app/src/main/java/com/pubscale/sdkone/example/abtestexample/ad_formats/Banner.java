@@ -61,6 +61,7 @@ public class Banner {
     }
 
     public void loadAd(Context context, ViewGroup adContainer) {
+        eventListener.onAdLoading();
         switch (remoteConfig.getAdProvider()) {
             case "admob": {
                 loadAdmobBannerAd(context, adContainer);
@@ -71,13 +72,12 @@ public class Banner {
                 break;
             }
             default: {
-
+                eventListener.onAdLoadFailed();
             }
         }
     }
 
     private void loadAdmobBannerAd(Context context, ViewGroup adContainer) {
-        eventListener.onAdLoading();
         AdView adView = new AdView(context);
         adContainer.removeAllViews();
         adContainer.addView(adView);
@@ -124,7 +124,6 @@ public class Banner {
     }
 
     private void loadSdkoneBannerAd(Context context, ViewGroup adContainer) {
-        eventListener.onAdLoading();
         GGAdview ggAdview = new GGAdview(context);
         adContainer.removeAllViews();
         adContainer.addView(ggAdview);

@@ -15,6 +15,7 @@ import com.pubscale.sdkone.example.abtestexample.databinding.ActivityMainBinding
 import com.pubscale.sdkone.example.abtestexample.event_listener.BannerNativeAdEventListener;
 import com.pubscale.sdkone.example.abtestexample.event_listener.InterstitialEventListener;
 import com.pubscale.sdkone.example.abtestexample.event_listener.RewardedAdEventListener;
+import com.pubscale.sdkone.example.abtestexample.utils.SharedPref;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -59,8 +60,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         appOpenAd = AppOpen.getInstance();
+        binding.switchAppOpen.setChecked(SharedPref.getInstance().isAppOpenAdDisabled());
         binding.switchAppOpen.setOnCheckedChangeListener((view, isChecked) -> {
-            appOpenAd.setShouldShowOnAppMovedToForeground(isChecked);
+            appOpenAd.disableAppOpenAd(isChecked);
         });
     }
 
