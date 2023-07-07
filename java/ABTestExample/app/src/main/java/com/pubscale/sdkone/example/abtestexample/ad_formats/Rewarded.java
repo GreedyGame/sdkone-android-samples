@@ -25,17 +25,50 @@ import com.pubscale.sdkone.example.abtestexample.utils.RemoteConfig;
 public class Rewarded {
     private static Rewarded rewardedAd = null;
     private RemoteConfig remoteConfig = RemoteConfig.getInstance();
-    private RewardedAdEventListener eventListener;
+    private RewardedAdEventListener eventListener = new RewardedAdEventListener() {
+        @Override
+        public void onReward() {
+        }
+
+        @Override
+        public void onAdLoading() {
+        }
+
+        @Override
+        public void onAdLoaded() {
+        }
+
+        @Override
+        public void onAdLoadFailed() {
+        }
+
+        @Override
+        public void onAdShowFailed() {
+        }
+
+        @Override
+        public void onAdOpened() {
+        }
+
+        @Override
+        public void onAdClosed() {
+        }
+    };
     private GGRewardedAd ggRewardedAd = null;
     private RewardedAd admobRewardedAd = null;
 
-    private Rewarded(RewardedAdEventListener eventListener) {
-        this.eventListener = eventListener;
+    private Rewarded() {
+
     }
 
-    public static synchronized Rewarded getInstance(RewardedAdEventListener eventListener) {
+    public static synchronized Rewarded getInstance() {
         if (rewardedAd != null) return rewardedAd;
-        rewardedAd = new Rewarded(eventListener);
+        rewardedAd = new Rewarded();
+        return rewardedAd;
+    }
+
+    public Rewarded setRewardedAdEventListener(RewardedAdEventListener eventListener) {
+        this.eventListener = eventListener;
         return rewardedAd;
     }
 

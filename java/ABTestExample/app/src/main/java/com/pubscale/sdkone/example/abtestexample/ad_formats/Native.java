@@ -22,14 +22,43 @@ import com.pubscale.sdkone.example.abtestexample.utils.RemoteConfig;
 public class Native {
     private static Native nativeAd = null;
     private RemoteConfig remoteConfig = RemoteConfig.getInstance();
-    private BannerNativeAdEventListener eventListener;
-    private Native(BannerNativeAdEventListener eventListener) {
-        this.eventListener = eventListener;
+    private BannerNativeAdEventListener eventListener = new BannerNativeAdEventListener() {
+        @Override
+        public void onAdLoading() {
+        }
+
+        @Override
+        public void onAdLoaded() {
+        }
+
+        @Override
+        public void onAdLoadFailed() {
+        }
+
+        @Override
+        public void onUiiOpened() {
+        }
+
+        @Override
+        public void onUiiClosed() {
+        }
+
+        @Override
+        public void onReadyForRefresh() {
+
+        }
+    };
+    private Native() {
     }
 
-    public static synchronized Native getInstance(BannerNativeAdEventListener eventListener) {
+    public static synchronized Native getInstance() {
         if(nativeAd != null) return nativeAd;
-        nativeAd = new Native(eventListener);
+        nativeAd = new Native();
+        return nativeAd;
+    }
+
+    public Native setBannerNativeAdEventListener(BannerNativeAdEventListener eventListener) {
+        this.eventListener = eventListener;
         return nativeAd;
     }
 

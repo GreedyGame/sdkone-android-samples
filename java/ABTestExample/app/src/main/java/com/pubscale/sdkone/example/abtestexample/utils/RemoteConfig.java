@@ -13,7 +13,7 @@ public class RemoteConfig {
     private RemoteConfig() {
         mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
         FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
-                .setMinimumFetchIntervalInSeconds(60)
+                .setMinimumFetchIntervalInSeconds(600)
                 .build();
         mFirebaseRemoteConfig.setConfigSettingsAsync(configSettings);
         Map<String, Object> defaults = new HashMap<>();

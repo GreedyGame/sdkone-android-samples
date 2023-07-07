@@ -20,17 +20,45 @@ import com.pubscale.sdkone.example.abtestexample.utils.RemoteConfig;
 public class Interstitial {
     private static Interstitial interstitialAd = null;
     private RemoteConfig remoteConfig = RemoteConfig.getInstance();
-    private InterstitialEventListener eventListener;
+    private InterstitialEventListener eventListener = new InterstitialEventListener() {
+        @Override
+        public void onAdLoading() {
+        }
+
+        @Override
+        public void onAdLoaded() {
+        }
+
+        @Override
+        public void onAdLoadFailed() {
+        }
+
+        @Override
+        public void onAdShowFailed() {
+        }
+
+        @Override
+        public void onAdOpened() {
+        }
+
+        @Override
+        public void onAdClosed() {
+        }
+    };
     private InterstitialAd admobInterstitialAd = null;
     private GGInterstitialAd ggInterstitialAd = null;
 
-    private Interstitial(InterstitialEventListener eventListener) {
-        this.eventListener = eventListener;
+    private Interstitial() {
     }
 
-    public static synchronized Interstitial getInstance(InterstitialEventListener eventListener) {
+    public static synchronized Interstitial getInstance() {
         if (interstitialAd != null) return interstitialAd;
-        interstitialAd = new Interstitial(eventListener);
+        interstitialAd = new Interstitial();
+        return interstitialAd;
+    }
+
+    public Interstitial setInterstitialAdEventListener(InterstitialEventListener eventListener) {
+        this.eventListener = eventListener;
         return interstitialAd;
     }
 

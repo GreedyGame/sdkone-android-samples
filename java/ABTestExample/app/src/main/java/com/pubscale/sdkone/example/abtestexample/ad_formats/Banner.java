@@ -20,15 +20,43 @@ import com.pubscale.sdkone.example.abtestexample.utils.RemoteConfig;
 public class Banner {
     private static Banner bannerAd = null;
     private RemoteConfig remoteConfig = RemoteConfig.getInstance();
-    private BannerNativeAdEventListener eventListener;
+    private BannerNativeAdEventListener eventListener = new BannerNativeAdEventListener() {
+        @Override
+        public void onAdLoading() {
+        }
 
-    private Banner(BannerNativeAdEventListener eventListener) {
-        this.eventListener = eventListener;
+        @Override
+        public void onAdLoaded() {
+        }
+
+        @Override
+        public void onAdLoadFailed() {
+        }
+
+        @Override
+        public void onUiiOpened() {
+        }
+
+        @Override
+        public void onUiiClosed() {
+        }
+
+        @Override
+        public void onReadyForRefresh() {
+        }
+    };
+
+    private Banner() {
     }
 
-    public static synchronized Banner getInstance(BannerNativeAdEventListener eventListener) {
+    public static synchronized Banner getInstance() {
         if (bannerAd != null) return bannerAd;
-        bannerAd = new Banner(eventListener);
+        bannerAd = new Banner();
+        return bannerAd;
+    }
+
+    public Banner setBannerNativeAdEventListener(BannerNativeAdEventListener eventListener) {
+        this.eventListener = eventListener;
         return bannerAd;
     }
 

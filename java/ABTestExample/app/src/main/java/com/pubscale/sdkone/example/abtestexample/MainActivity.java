@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.pubscale.sdkone.example.abtestexample.ad_formats.AppOpen;
 import com.pubscale.sdkone.example.abtestexample.ad_formats.Banner;
 import com.pubscale.sdkone.example.abtestexample.ad_formats.Interstitial;
 import com.pubscale.sdkone.example.abtestexample.ad_formats.Native;
@@ -18,6 +19,9 @@ import com.pubscale.sdkone.example.abtestexample.event_listener.RewardedAdEventL
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    private Interstitial interstitialAd = null;
+    private Rewarded rewardedAd = null;
+    private AppOpen appOpenAd = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,11 @@ public class MainActivity extends AppCompatActivity {
 
         binding.rewardedShowButton.setOnClickListener(view -> {
             showRewardedAd();
+        });
+
+        appOpenAd = AppOpen.getInstance();
+        binding.switchAppOpen.setOnCheckedChangeListener((view, isChecked) -> {
+            appOpenAd.setShouldShowOnAppMovedToForeground(isChecked);
         });
     }
 
@@ -88,7 +97,9 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        Banner.getInstance(bannerNativeAdEventListener).loadAd(this, binding.bannerAd);
+        Banner.getInstance()
+                .setBannerNativeAdEventListener(bannerNativeAdEventListener)
+                .loadAd(this, binding.bannerAd);
     }
 
     private void loadNativeAd() {
@@ -124,10 +135,11 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        Native.getInstance(bannerNativeAdEventListener).loadAd(this, binding.nativeAd);
+        Native.getInstance()
+                .setBannerNativeAdEventListener(bannerNativeAdEventListener)
+                .loadAd(this, binding.nativeAd);
     }
 
-    private Interstitial interstitialAd = null;
     private void loadInterstitialAd(boolean goToNextActivity) {
         InterstitialEventListener interstitialEventListener = new InterstitialEventListener() {
             @Override
@@ -168,20 +180,18 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        interstitialAd = Interstitial.getInstance(interstitialEventListener);
+        interstitialAd = Interstitial.getInstance()
+                .setInterstitialAdEventListener(interstitialEventListener);
         interstitialAd.loadAd(this);
     }
 
     private void showInterstitialAd() {
-        if(interstitialAd == null) return;
         interstitialAd.showAd(this);
     }
 
     private void proceedToNextActivity() {
         startActivity(new Intent(this, DummyActivity.class));
     }
-
-    private Rewarded rewardedAd = null;
 
     private void loadRewardedAd() {
         RewardedAdEventListener rewardedAdEventListener = new RewardedAdEventListener() {
@@ -225,12 +235,12 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        rewardedAd = Rewarded.getInstance(rewardedAdEventListener);
+        rewardedAd = Rewarded.getInstance()
+                .setRewardedAdEventListener(rewardedAdEventListener);
         rewardedAd.loadAd(this);
     }
 
     private void showRewardedAd() {
-        if(rewardedAd == null) return;
         rewardedAd.showAd(this);
     }
 }
