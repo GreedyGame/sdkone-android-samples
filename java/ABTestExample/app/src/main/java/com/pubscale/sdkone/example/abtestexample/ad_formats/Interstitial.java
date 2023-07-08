@@ -14,13 +14,13 @@ import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.pubscale.sdkone.core.interstitial.general.GGInterstitialAd;
 import com.pubscale.sdkone.core.interstitial.general.GGInterstitialEventsListener;
 import com.pubscale.sdkone.core.models.general.AdErrors;
-import com.pubscale.sdkone.example.abtestexample.event_listener.InterstitialEventListener;
+import com.pubscale.sdkone.example.abtestexample.event_listener.InterstitialAdEventListener;
 import com.pubscale.sdkone.example.abtestexample.utils.RemoteConfig;
 
 public class Interstitial {
     private static Interstitial interstitialAd = null;
     private RemoteConfig remoteConfig = RemoteConfig.getInstance();
-    private InterstitialEventListener eventListener = new InterstitialEventListener() {
+    private InterstitialAdEventListener eventListener = new InterstitialAdEventListener() {
         @Override
         public void onAdLoading() {
         }
@@ -57,7 +57,7 @@ public class Interstitial {
         return interstitialAd;
     }
 
-    public Interstitial setInterstitialAdEventListener(InterstitialEventListener eventListener) {
+    public Interstitial setInterstitialAdEventListener(InterstitialAdEventListener eventListener) {
         this.eventListener = eventListener;
         return interstitialAd;
     }

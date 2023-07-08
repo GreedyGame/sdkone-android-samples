@@ -13,7 +13,7 @@ import com.pubscale.sdkone.example.abtestexample.ad_formats.Native;
 import com.pubscale.sdkone.example.abtestexample.ad_formats.Rewarded;
 import com.pubscale.sdkone.example.abtestexample.databinding.ActivityMainBinding;
 import com.pubscale.sdkone.example.abtestexample.event_listener.BannerNativeAdEventListener;
-import com.pubscale.sdkone.example.abtestexample.event_listener.InterstitialEventListener;
+import com.pubscale.sdkone.example.abtestexample.event_listener.InterstitialAdEventListener;
 import com.pubscale.sdkone.example.abtestexample.event_listener.RewardedAdEventListener;
 import com.pubscale.sdkone.example.abtestexample.utils.SharedPref;
 
@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadInterstitialAd(boolean goToNextActivity) {
-        InterstitialEventListener interstitialEventListener = new InterstitialEventListener() {
+        InterstitialAdEventListener interstitialAdEventListener = new InterstitialAdEventListener() {
             @Override
             public void onAdLoading() {
                 binding.interstitialAdStatus.setText("Loading...");
@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
         interstitialAd = Interstitial.getInstance()
-                .setInterstitialAdEventListener(interstitialEventListener);
+                .setInterstitialAdEventListener(interstitialAdEventListener);
         interstitialAd.loadAd(this);
     }
 
