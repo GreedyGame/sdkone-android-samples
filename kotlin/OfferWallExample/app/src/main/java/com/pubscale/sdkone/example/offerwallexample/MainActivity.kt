@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         OfferWall.init(offerWallConfig, object: OfferWallInitListener {
             override fun onInitSuccess() {
                 binding.destroy.isEnabled = true
-                Toast.makeText(this@MainActivity, "OfferWall SDK Initialed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity, "OfferWall SDK Initialized", Toast.LENGTH_SHORT).show()
             }
 
             override fun onInitFailed(error: InitError) {
