@@ -15,7 +15,6 @@ import com.pubscale.sdkone.example.abtestexample.utils.RemoteConfig
 
 object AppOpen {
 
-    private val remoteConfig = RemoteConfig
     private var isAppOpenAdDisabled = false
     private var admobAppOpenAd: AppOpenAd? = null
 
@@ -49,7 +48,7 @@ object AppOpen {
             return
         }
         eventListener.onAdLoading()
-        when (remoteConfig.adProvider) {
+        when (RemoteConfig.adProvider) {
             "admob" -> {
                 loadAdmobAppOpenAd(context)
             }
@@ -65,7 +64,7 @@ object AppOpen {
     }
 
     fun showAd(activity: Activity) {
-        when (remoteConfig.adProvider) {
+        when (RemoteConfig.adProvider) {
             "admob" -> {
                 showAdmobAppOpenAd(activity)
             }

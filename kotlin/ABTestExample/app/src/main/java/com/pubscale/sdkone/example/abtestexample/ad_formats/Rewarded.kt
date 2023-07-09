@@ -15,7 +15,6 @@ import com.pubscale.sdkone.example.abtestexample.event_listener.RewardedAdEventL
 import com.pubscale.sdkone.example.abtestexample.utils.RemoteConfig
 
 object Rewarded {
-    private val remoteConfig: RemoteConfig = RemoteConfig
     private var ggRewardedAd: GGRewardedAd? = null
     private var admobRewardedAd: RewardedAd? = null
 
@@ -36,7 +35,7 @@ object Rewarded {
 
     fun loadAd(context: Context) {
         eventListener.onAdLoading()
-        when (remoteConfig.adProvider) {
+        when (RemoteConfig.adProvider) {
             "admob" -> {
                 loadAdmobRewardedAd(context)
             }
@@ -52,7 +51,7 @@ object Rewarded {
     }
 
     fun showAd(activity: Activity) {
-        when (remoteConfig.adProvider) {
+        when (RemoteConfig.adProvider) {
             "admob" -> {
                 showAdmobRewardedAd(activity)
             }

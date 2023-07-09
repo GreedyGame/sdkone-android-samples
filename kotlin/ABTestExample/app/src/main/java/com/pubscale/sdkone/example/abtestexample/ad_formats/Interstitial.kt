@@ -15,7 +15,6 @@ import com.pubscale.sdkone.example.abtestexample.event_listener.InterstitialAdEv
 import com.pubscale.sdkone.example.abtestexample.utils.RemoteConfig
 
 object Interstitial {
-    private val remoteConfig: RemoteConfig = RemoteConfig
     private var admobInterstitialAd: InterstitialAd? = null
     private var ggInterstitialAd: GGInterstitialAd? = null
 
@@ -35,7 +34,7 @@ object Interstitial {
 
     fun loadAd(context: Context) {
         eventListener.onAdLoading()
-        when (remoteConfig.adProvider) {
+        when (RemoteConfig.adProvider) {
             "admob" -> {
                 loadAdmobInterstitialAd(context)
             }
@@ -51,7 +50,7 @@ object Interstitial {
     }
 
     fun showAd(activity: Activity) {
-        when (remoteConfig.adProvider) {
+        when (RemoteConfig.adProvider) {
             "admob" -> {
                 showAdmobInterstitialAd(activity)
             }

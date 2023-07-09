@@ -18,7 +18,6 @@ import com.pubscale.sdkone.example.abtestexample.event_listener.BannerNativeAdEv
 import com.pubscale.sdkone.example.abtestexample.utils.RemoteConfig
 
 object Native {
-    private val remoteConfig: RemoteConfig = RemoteConfig
     private var eventListener: BannerNativeAdEventListener = object : BannerNativeAdEventListener {
         override fun onAdLoading() {}
         override fun onAdLoaded() {}
@@ -35,7 +34,7 @@ object Native {
 
     fun loadAd(context: Context, adContainer: ViewGroup) {
         eventListener.onAdLoading()
-        when (remoteConfig.adProvider) {
+        when (RemoteConfig.adProvider) {
             "admob" -> {
                 loadAdmobNativeAd(context, adContainer)
             }
