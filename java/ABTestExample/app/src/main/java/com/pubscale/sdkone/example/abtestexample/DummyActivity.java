@@ -2,6 +2,7 @@ package com.pubscale.sdkone.example.abtestexample;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.pubscale.sdkone.example.abtestexample.databinding.ActivityDummyBinding;
