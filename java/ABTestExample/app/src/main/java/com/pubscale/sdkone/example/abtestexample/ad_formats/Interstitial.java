@@ -162,11 +162,13 @@ public class Interstitial {
             @Override
             public void onAdLoadFailed(@NonNull AdErrors adErrors) {
                 eventListener.onAdLoadFailed();
+                ggInterstitialAd.removeListener(this);
             }
 
             @Override
             public void onAdShowFailed() {
                 eventListener.onAdShowFailed();
+                ggInterstitialAd.removeListener(this);
             }
 
             @Override
@@ -177,6 +179,7 @@ public class Interstitial {
             @Override
             public void onAdClosed() {
                 eventListener.onAdClosed();
+                ggInterstitialAd.removeListener(this);
             }
         });
 

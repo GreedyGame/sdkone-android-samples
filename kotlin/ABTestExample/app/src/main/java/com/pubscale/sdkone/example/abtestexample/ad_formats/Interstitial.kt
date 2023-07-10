@@ -122,10 +122,12 @@ object Interstitial {
 
             override fun onAdLoadFailed(adErrors: AdErrors) {
                 eventListener.onAdLoadFailed()
+                ggInterstitialAd?.removeListener(this)
             }
 
             override fun onAdShowFailed() {
                 eventListener.onAdShowFailed()
+                ggInterstitialAd?.removeListener(this)
             }
 
             override fun onAdOpened() {
@@ -134,6 +136,7 @@ object Interstitial {
 
             override fun onAdClosed() {
                 eventListener.onAdClosed()
+                ggInterstitialAd?.removeListener(this)
             }
         })
         ggInterstitialAd?.loadAd()
