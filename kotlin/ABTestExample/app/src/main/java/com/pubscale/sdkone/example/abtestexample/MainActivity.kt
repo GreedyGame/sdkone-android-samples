@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity() {
         val appOpenAdEventListener = object : AppOpenAdEventListener {
             override fun onAdLoading() {
                 binding.appOpenAdStatus.text = "Loading..."
+                binding.appOpenLoadButton.isEnabled = false
             }
 
             override fun onAdLoaded() {
@@ -59,18 +60,19 @@ class MainActivity : AppCompatActivity() {
 
             override fun onAdLoadFailed() {
                 binding.appOpenAdStatus.text = "Failed"
-
+                binding.appOpenLoadButton.isEnabled = true
             }
 
             override fun onAdShowFailed() {
                 binding.appOpenAdStatus.text = "Show failed"
                 binding.appOpenShowButton.isEnabled = false
-
+                binding.appOpenLoadButton.isEnabled = true
             }
 
             override fun onAdOpened() {
                 binding.appOpenAdStatus.text = "Opened"
                 binding.appOpenShowButton.isEnabled = false
+                binding.appOpenLoadButton.isEnabled = true
             }
 
             override fun onAdClosed() {
@@ -89,14 +91,17 @@ class MainActivity : AppCompatActivity() {
         val bannerNativeAdEventListener = object : BannerNativeAdEventListener {
             override fun onAdLoading() {
                 binding.bannerAdStatus.text = "Loading..."
+                binding.bannerAdLoadButton.isEnabled = false
             }
 
             override fun onAdLoaded() {
                 binding.bannerAdStatus.text = "Loaded"
+                binding.bannerAdLoadButton.isEnabled = true
             }
 
             override fun onAdLoadFailed() {
                 binding.bannerAdStatus.text = "Failed"
+                binding.bannerAdLoadButton.isEnabled = true
             }
 
             override fun onUiiOpened() {
@@ -119,14 +124,17 @@ class MainActivity : AppCompatActivity() {
         val bannerNativeAdEventListener = object : BannerNativeAdEventListener {
             override fun onAdLoading() {
                 binding.nativeAdStatus.text = "Loading..."
+                binding.nativeAdLoadButton.isEnabled = false
             }
 
             override fun onAdLoaded() {
                 binding.nativeAdStatus.text = "Loaded"
+                binding.nativeAdLoadButton.isEnabled = true
             }
 
             override fun onAdLoadFailed() {
                 binding.nativeAdStatus.text = "Failed"
+                binding.nativeAdLoadButton.isEnabled = true
             }
 
             override fun onUiiOpened() {
@@ -149,6 +157,7 @@ class MainActivity : AppCompatActivity() {
         val interstitialAdEventListener = object : InterstitialAdEventListener {
             override fun onAdLoading() {
                 binding.interstitialAdStatus.text = "Loading..."
+                binding.interstitialLoadButton.isEnabled = false
             }
 
             override fun onAdLoaded() {
@@ -159,18 +168,21 @@ class MainActivity : AppCompatActivity() {
 
             override fun onAdLoadFailed() {
                 binding.interstitialAdStatus.text = "Load failed"
+                binding.interstitialLoadButton.isEnabled = true
                 if (goToNextActivity) proceedToNextActivity()
             }
 
             override fun onAdShowFailed() {
                 binding.interstitialAdStatus.text = "Show failed"
                 binding.interstitialShowButton.isEnabled = false
+                binding.interstitialLoadButton.isEnabled = true
                 if (goToNextActivity) proceedToNextActivity()
             }
 
             override fun onAdOpened() {
                 binding.interstitialAdStatus.text = "Opened"
                 binding.interstitialShowButton.isEnabled = false
+                binding.interstitialLoadButton.isEnabled = true
             }
 
             override fun onAdClosed() {
@@ -198,6 +210,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onAdLoading() {
                 binding.rewardedAdStatus.text = "Loading..."
+                binding.rewardedLoadButton.isEnabled = false
             }
 
             override fun onAdLoaded() {
@@ -207,16 +220,19 @@ class MainActivity : AppCompatActivity() {
 
             override fun onAdLoadFailed() {
                 binding.rewardedAdStatus.text = "Failed"
+                binding.rewardedLoadButton.isEnabled = true
             }
 
             override fun onAdShowFailed() {
                 binding.rewardedAdStatus.text = "Show failed"
                 binding.rewardedShowButton.isEnabled = false
+                binding.rewardedLoadButton.isEnabled = true
             }
 
             override fun onAdOpened() {
                 binding.rewardedAdStatus.text = "Opened"
                 binding.rewardedShowButton.isEnabled = false
+                binding.rewardedLoadButton.isEnabled = true
             }
 
             override fun onAdClosed() {

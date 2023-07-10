@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAdLoading() {
                 binding.appOpenAdStatus.setText("Loading...");
+                binding.appOpenLoadButton.setEnabled(false);
             }
 
             @Override
@@ -87,18 +88,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAdLoadFailed() {
                 binding.appOpenAdStatus.setText("Failed");
+                binding.appOpenLoadButton.setEnabled(true);
             }
 
             @Override
             public void onAdShowFailed() {
                 binding.appOpenAdStatus.setText("Show failed");
                 binding.appOpenShowButton.setEnabled(false);
+                binding.appOpenLoadButton.setEnabled(true);
             }
 
             @Override
             public void onAdOpened() {
                 binding.appOpenAdStatus.setText("Opened");
                 binding.appOpenShowButton.setEnabled(false);
+                binding.appOpenLoadButton.setEnabled(true);
             }
 
             @Override
@@ -119,16 +123,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAdLoading() {
                 binding.bannerAdStatus.setText("Loading...");
+                binding.bannerAdLoadButton.setEnabled(false);
             }
 
             @Override
             public void onAdLoaded() {
                 binding.bannerAdStatus.setText("Loaded");
+                binding.bannerAdLoadButton.setEnabled(true);
             }
 
             @Override
             public void onAdLoadFailed() {
                 binding.bannerAdStatus.setText("Failed");
+                binding.bannerAdLoadButton.setEnabled(true);
             }
 
             @Override
@@ -157,16 +164,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAdLoading() {
                 binding.nativeAdStatus.setText("Loading...");
+                binding.nativeAdLoadButton.setEnabled(false);
             }
 
             @Override
             public void onAdLoaded() {
                 binding.nativeAdStatus.setText("Loaded");
+                binding.nativeAdLoadButton.setEnabled(true);
             }
 
             @Override
             public void onAdLoadFailed() {
                 binding.nativeAdStatus.setText("Failed");
+                binding.nativeAdLoadButton.setEnabled(true);
             }
 
             @Override
@@ -195,6 +205,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAdLoading() {
                 binding.interstitialAdStatus.setText("Loading...");
+                binding.interstitialLoadButton.setEnabled(false);
             }
 
             @Override
@@ -207,6 +218,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAdLoadFailed() {
                 binding.interstitialAdStatus.setText("Load failed");
+                binding.interstitialLoadButton.setEnabled(true);
                 if(goToNextActivity) proceedToNextActivity();
             }
 
@@ -214,6 +226,7 @@ public class MainActivity extends AppCompatActivity {
             public void onAdShowFailed() {
                 binding.interstitialAdStatus.setText("Show failed");
                 binding.interstitialShowButton.setEnabled(false);
+                binding.interstitialLoadButton.setEnabled(true);
                 if(goToNextActivity) proceedToNextActivity();
             }
 
@@ -221,6 +234,7 @@ public class MainActivity extends AppCompatActivity {
             public void onAdOpened() {
                 binding.interstitialAdStatus.setText("Opened");
                 binding.interstitialShowButton.setEnabled(false);
+                binding.interstitialLoadButton.setEnabled(true);
             }
 
             @Override
@@ -254,6 +268,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAdLoading() {
                 binding.rewardedAdStatus.setText("Loading...");
+                binding.rewardedLoadButton.setEnabled(false);
             }
 
             @Override
@@ -265,18 +280,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAdLoadFailed() {
                 binding.rewardedAdStatus.setText("Failed");
+                binding.rewardedLoadButton.setEnabled(true);
             }
 
             @Override
             public void onAdShowFailed() {
                 binding.rewardedAdStatus.setText("Show failed");
                 binding.rewardedShowButton.setEnabled(false);
+                binding.rewardedLoadButton.setEnabled(true);
             }
 
             @Override
             public void onAdOpened() {
                 binding.rewardedAdStatus.setText("Opened");
                 binding.rewardedShowButton.setEnabled(false);
+                binding.rewardedLoadButton.setEnabled(true);
             }
 
             @Override
