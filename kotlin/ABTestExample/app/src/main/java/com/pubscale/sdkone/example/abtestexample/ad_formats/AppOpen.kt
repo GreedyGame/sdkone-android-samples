@@ -15,9 +15,15 @@ import com.pubscale.sdkone.example.abtestexample.utils.RemoteConfig
 
 object AppOpen {
 
-    private var isAppOpenAdDisabled = false
     private var admobAppOpenAd: AppOpenAd? = null
 
+    var isLoadingAd: Boolean = false
+        private set
+    var isShowingAd: Boolean = false
+        private set
+
+    val isAdAvailable: Boolean
+        get() = admobAppOpenAd != null
 
     private var eventListener: AppOpenAdEventListener = object : AppOpenAdEventListener {
         override fun onAdLoading() {}
@@ -26,7 +32,6 @@ object AppOpen {
         override fun onAdShowFailed() {}
         override fun onAdOpened() {}
         override fun onAdClosed() {}
-        override fun onAdDisabled() {}
     }
 
     init {
@@ -38,56 +43,58 @@ object AppOpen {
         return this
     }
 
-    fun disableAppOpenAd(value: Boolean) {
-        isAppOpenAdDisabled = value
-    }
-
-    fun loadAd(context: Context) {
-        if (isAppOpenAdDisabled) {
-            eventListener.onAdDisabled()
-            return
-        }
+    fun loadAd(context: Context, manual: Boolean) {
         eventListener.onAdLoading()
         when (RemoteConfig.adProvider) {
             "admob" -> {
+                GGAppOpenAds.setShouldShowOnAppMovedToForeground(false)
                 loadAdmobAppOpenAd(context)
             }
 
             "sdkone" -> {
-                loadSdkoneAppOpenAd()
+                GGAppOpenAds.setShouldShowOnAppMovedToForeground(true)
+                if(manual) { loadSdkoneAppOpenAd() }
+                else { /** SDKOne will handle auto app open ads upon app coming to foreground */}
             }
 
             else -> {
+                GGAppOpenAds.setShouldShowOnAppMovedToForeground(false)
                 eventListener.onAdLoadFailed()
             }
         }
     }
 
-    fun showAd(activity: Activity) {
+    fun showAd(activity: Activity, manual: Boolean) {
         when (RemoteConfig.adProvider) {
             "admob" -> {
                 showAdmobAppOpenAd(activity)
             }
 
             "sdkone" -> {
-                GGAppOpenAds.show(activity)
+                if(manual) { GGAppOpenAds.show(activity) }
+                else { /** SDKOne will handle auto app open ads upon app coming to foreground */}
             }
 
-            else -> {}
+            else -> {
+                eventListener.onAdShowFailed()
+            }
         }
     }
 
     private fun loadAdmobAppOpenAd(context: Context) {
+        isLoadingAd = true
         val request = AdRequest.Builder().build()
         AppOpenAd.load(
             context, "ca-app-pub-3940256099942544/3419835294", request,
             object : AppOpenAd.AppOpenAdLoadCallback() {
                 override fun onAdLoaded(ad: AppOpenAd) {
-                    eventListener.onAdLoaded()
                     admobAppOpenAd = ad
+                    isLoadingAd = false
+                    eventListener.onAdLoaded()
                 }
 
                 override fun onAdFailedToLoad(loadAdError: LoadAdError) {
+                    isLoadingAd = false
                     eventListener.onAdLoadFailed()
                 }
             })
@@ -105,6 +112,7 @@ object AppOpen {
 
             override fun onAdDismissedFullScreenContent() {
                 super.onAdDismissedFullScreenContent()
+                isShowingAd = false
                 eventListener.onAdClosed()
             }
 
@@ -119,6 +127,7 @@ object AppOpen {
 
             override fun onAdShowedFullScreenContent() {
                 super.onAdShowedFullScreenContent()
+                isShowingAd = true
                 eventListener.onAdOpened()
             }
         }
@@ -126,27 +135,33 @@ object AppOpen {
     }
 
     private fun loadSdkoneAppOpenAd() {
+        isLoadingAd = true
         GGAppOpenAds.setShouldShowOnAppMovedToForeground(true)
         GGAppOpenAds.addListener(object : AppOpenAdsEventsListener {
             override fun onAdLoaded() {
+                isLoadingAd = false
                 eventListener.onAdLoaded()
             }
 
             override fun onAdLoadFailed(adErrors: AdErrors) {
+                isLoadingAd = false
                 eventListener.onAdLoadFailed()
                 GGAppOpenAds.removeListener(this)
             }
 
             override fun onAdShowFailed() {
+                isShowingAd = false
                 eventListener.onAdShowFailed()
                 GGAppOpenAds.removeListener(this)
             }
 
             override fun onAdOpened() {
+                isShowingAd = true
                 eventListener.onAdOpened()
             }
 
             override fun onAdClosed() {
+                isShowingAd = false
                 eventListener.onAdClosed()
                 GGAppOpenAds.removeListener(this)
             }

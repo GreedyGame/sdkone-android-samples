@@ -15,14 +15,22 @@ import com.pubscale.sdkone.example.abtestexample.event_listener.AppOpenAdEventLi
 import com.pubscale.sdkone.core.app_open_ads.general.GGAppOpenAds;
 import com.pubscale.sdkone.core.models.general.AdErrors;
 import com.pubscale.sdkone.example.abtestexample.utils.RemoteConfig;
-import com.pubscale.sdkone.example.abtestexample.utils.SharedPref;
 
 public class AppOpen {
     private static AppOpen appOpenAd = null;
     private RemoteConfig remoteConfig = RemoteConfig.getInstance();
-    private boolean isAppOpenAdDisabled;
-    private SharedPref sharedPref;
     private AppOpenAd admobAppOpenAd = null;
+    private boolean isLoadingAd = false;
+    public boolean isLoadingAd() {
+        return isLoadingAd;
+    }
+    private boolean isShowingAd = false;
+    public boolean isShowingAd() {
+        return isShowingAd;
+    }
+    public boolean isAdAvailable() {
+        return admobAppOpenAd != null;
+    }
 
     private AppOpenAdEventListener eventListener = new AppOpenAdEventListener() {
         @Override
@@ -48,16 +56,10 @@ public class AppOpen {
         @Override
         public void onAdClosed() {
         }
-
-        @Override
-        public void onAdDisabled() {
-        }
     };
 
     private AppOpen() {
         GGAppOpenAds.setShouldShowOnAppMovedToForeground(false);
-        sharedPref = SharedPref.getInstance();
-        isAppOpenAdDisabled = sharedPref.isAppOpenAdDisabled();
     }
 
     public static AppOpen getInstance() {
@@ -71,60 +73,60 @@ public class AppOpen {
         return appOpenAd;
     }
 
-    public void disableAppOpenAd(boolean value) {
-        this.isAppOpenAdDisabled = value;
-        sharedPref.disableAppOpenAd(value);
-    }
-
-    public void loadAd(Context context) {
-        if(isAppOpenAdDisabled) {
-            eventListener.onAdDisabled();
-            return;
-        }
+    public void loadAd(Context context, boolean manual) {
         eventListener.onAdLoading();
         switch (remoteConfig.getAdProvider()) {
             case "admob": {
+                GGAppOpenAds.setShouldShowOnAppMovedToForeground(false);
                 loadAdmobAppOpenAd(context);
                 break;
             }
             case "sdkone": {
-                loadSdkoneAppOpenAd();
+                GGAppOpenAds.setShouldShowOnAppMovedToForeground(true);
+                if(manual) { loadSdkoneAppOpenAd(); }
+                else { /** SDKOne will handle auto app open ads upon app coming to foreground */ }
                 break;
             }
             default: {
+                GGAppOpenAds.setShouldShowOnAppMovedToForeground(false);
                 eventListener.onAdLoadFailed();
             }
         }
     }
 
-    public void showAd(Activity activity) {
+    public void showAd(Activity activity, boolean manual) {
         switch (remoteConfig.getAdProvider()) {
             case "admob": {
                 showAdmobAppOpenAd(activity);
                 break;
             }
             case "sdkone": {
-                GGAppOpenAds.show(activity);
+                if(manual) { GGAppOpenAds.show(activity); }
+                else { /** SDKOne will handle auto app open ads upon app coming to foreground */ }
                 break;
             }
             default: {
+                eventListener.onAdShowFailed();
             }
         }
     }
 
     private void loadAdmobAppOpenAd(Context context) {
+        isLoadingAd = true;
         AdRequest request = new AdRequest.Builder().build();
         AppOpenAd.load(
                 context, "ca-app-pub-3940256099942544/3419835294", request,
                 new AppOpenAd.AppOpenAdLoadCallback() {
                     @Override
                     public void onAdLoaded(AppOpenAd ad) {
-                        eventListener.onAdLoaded();
                         admobAppOpenAd = ad;
+                        isLoadingAd = false;
+                        eventListener.onAdLoaded();
                     }
 
                     @Override
                     public void onAdFailedToLoad(LoadAdError loadAdError) {
+                        isLoadingAd = false;
                         eventListener.onAdLoadFailed();
                     }
                 });
@@ -145,12 +147,14 @@ public class AppOpen {
             @Override
             public void onAdDismissedFullScreenContent() {
                 super.onAdDismissedFullScreenContent();
+                isShowingAd = false;
                 eventListener.onAdClosed();
             }
 
             @Override
             public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
                 super.onAdFailedToShowFullScreenContent(adError);
+                isShowingAd = false;
                 eventListener.onAdShowFailed();
             }
 
@@ -162,6 +166,7 @@ public class AppOpen {
             @Override
             public void onAdShowedFullScreenContent() {
                 super.onAdShowedFullScreenContent();
+                isShowingAd = true;
                 eventListener.onAdOpened();
             }
         });
@@ -170,33 +175,37 @@ public class AppOpen {
     }
 
     private void loadSdkoneAppOpenAd() {
-        GGAppOpenAds.setShouldShowOnAppMovedToForeground(true);
-
+        isLoadingAd = true;
         GGAppOpenAds.addListener(new AppOpenAdsEventsListener() {
             @Override
             public void onAdLoaded() {
+                isLoadingAd = false;
                 eventListener.onAdLoaded();
             }
 
             @Override
             public void onAdLoadFailed(@NonNull AdErrors adErrors) {
+                isLoadingAd = false;
                 eventListener.onAdLoadFailed();
                 GGAppOpenAds.removeListener(this);
             }
 
             @Override
             public void onAdShowFailed() {
+                isShowingAd = false;
                 eventListener.onAdShowFailed();
                 GGAppOpenAds.removeListener(this);
             }
 
             @Override
             public void onAdOpened() {
+                isShowingAd = true;
                 eventListener.onAdOpened();
             }
 
             @Override
             public void onAdClosed() {
+                isShowingAd = false;
                 eventListener.onAdClosed();
                 GGAppOpenAds.removeListener(this);
             }

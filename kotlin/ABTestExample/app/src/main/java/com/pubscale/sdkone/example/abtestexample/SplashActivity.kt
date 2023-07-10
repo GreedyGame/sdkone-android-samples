@@ -2,7 +2,6 @@ package com.pubscale.sdkone.example.abtestexample
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.pubscale.sdkone.example.abtestexample.ad_formats.AppOpen
 import com.pubscale.sdkone.example.abtestexample.databinding.ActivitySplashBinding
@@ -28,7 +27,7 @@ class SplashActivity : AppCompatActivity() {
 
             override fun onAdLoaded() {
                 binding.appOpenStatus.text = "Loaded"
-                AppOpen.showAd(this@SplashActivity)
+                AppOpen.showAd(this@SplashActivity, true)
             }
 
             override fun onAdLoadFailed() {
@@ -49,15 +48,8 @@ class SplashActivity : AppCompatActivity() {
                 binding.appOpenStatus.text = "Closed"
                 openMainActivity()
             }
-
-            override fun onAdDisabled() {
-                binding.appOpenStatus.text = "Disabled"
-                Toast.makeText(this@SplashActivity, "App open ad disabled", Toast.LENGTH_SHORT)
-                    .show()
-                openMainActivity()
-            }
         }
-        AppOpen.setAppOpenAdEventListener(appOpenAdEventListener).loadAd(this)
+        AppOpen.setAppOpenAdEventListener(appOpenAdEventListener).loadAd(this, true)
     }
 
     private fun openMainActivity() {

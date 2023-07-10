@@ -7,5 +7,4 @@ interface AppOpenAdEventListener {
     fun onAdShowFailed()
     fun onAdOpened()
     fun onAdClosed()
-    fun onAdDisabled()
 }

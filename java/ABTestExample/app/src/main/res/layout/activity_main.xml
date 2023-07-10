@@ -6,29 +6,55 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/appOpenLabel"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/appOpenFlow"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="40dp"
-        android:labelFor="@id/switchAppOpen"
-        android:text="Disable app open ad"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@id/switchAppOpen"
+        android:layout_marginTop="16dp"
+        app:constraint_referenced_ids="appOpenTitle,appOpenAdStatus"
+        app:flow_horizontalGap="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/switchAppOpen"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/appOpenTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
-        android:checked="true"
-        app:layout_constraintBottom_toBottomOf="@id/appOpenLabel"
+        android:layout_marginEnd="10dp"
+        android:text="App Open Ad" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/appOpenAdStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="..." />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/appOpenButtonFlow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="appOpenLoadButton,appOpenShowButton"
+        app:flow_horizontalGap="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/appOpenLabel"
-        app:layout_constraintTop_toTopOf="@id/appOpenLabel" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appOpenFlow" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/appOpenLoadButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Load Ad"
+        app:cornerRadius="7dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/appOpenShowButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:text="Show Ad"
+        app:cornerRadius="7dp" />
+
 
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/interstitialFlow"
@@ -39,7 +65,7 @@
         app:flow_horizontalGap="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/appOpenLabel" />
+        app:layout_constraintTop_toBottomOf="@id/appOpenButtonFlow" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/interstitialTitle"

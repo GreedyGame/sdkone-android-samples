@@ -7,5 +7,4 @@ public interface AppOpenAdEventListener {
     void onAdShowFailed();
     void onAdOpened();
     void onAdClosed();
-    void onAdDisabled();
 }

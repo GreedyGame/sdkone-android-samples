@@ -34,7 +34,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onAdLoaded() {
                 binding.appOpenStatus.setText("Loaded");
-                appOpenAd.showAd(SplashActivity.this);
+                appOpenAd.showAd(SplashActivity.this, true);
             }
 
             @Override
@@ -59,17 +59,10 @@ public class SplashActivity extends AppCompatActivity {
                 binding.appOpenStatus.setText("Closed");
                 openMainActivity();
             }
-
-            @Override
-            public void onAdDisabled() {
-                binding.appOpenStatus.setText("Disabled");
-                Toast.makeText(SplashActivity.this, "App open ad disabled", Toast.LENGTH_SHORT).show();
-                openMainActivity();
-            }
         };
 
         appOpenAd.setAppOpenAdEventListener(appOpenAdEventListener);
-        appOpenAd.loadAd(this);
+        appOpenAd.loadAd(this, true);
     }
 
     private void openMainActivity() {

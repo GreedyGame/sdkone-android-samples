@@ -6,16 +6,17 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.pubscale.sdkone.core.models.core.App;
 import com.pubscale.sdkone.example.abtestexample.ad_formats.AppOpen;
 import com.pubscale.sdkone.example.abtestexample.ad_formats.Banner;
 import com.pubscale.sdkone.example.abtestexample.ad_formats.Interstitial;
 import com.pubscale.sdkone.example.abtestexample.ad_formats.Native;
 import com.pubscale.sdkone.example.abtestexample.ad_formats.Rewarded;
 import com.pubscale.sdkone.example.abtestexample.databinding.ActivityMainBinding;
+import com.pubscale.sdkone.example.abtestexample.event_listener.AppOpenAdEventListener;
 import com.pubscale.sdkone.example.abtestexample.event_listener.BannerNativeAdEventListener;
 import com.pubscale.sdkone.example.abtestexample.event_listener.InterstitialAdEventListener;
 import com.pubscale.sdkone.example.abtestexample.event_listener.RewardedAdEventListener;
-import com.pubscale.sdkone.example.abtestexample.utils.SharedPref;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,6 +31,15 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        appOpenAd = AppOpen.getInstance();
+        binding.appOpenLoadButton.setOnClickListener(view -> {
+            loadAppOpenAd();
+        });
+
+        binding.appOpenShowButton.setOnClickListener(view -> {
+            showAppOpenAd();
+        });
 
         binding.bannerAdLoadButton.setOnClickListener(view -> {
             loadBannerAd();
@@ -59,11 +69,49 @@ public class MainActivity extends AppCompatActivity {
             showRewardedAd();
         });
 
-        appOpenAd = AppOpen.getInstance();
-        binding.switchAppOpen.setChecked(SharedPref.getInstance().isAppOpenAdDisabled());
-        binding.switchAppOpen.setOnCheckedChangeListener((view, isChecked) -> {
-            appOpenAd.disableAppOpenAd(isChecked);
-        });
+    }
+
+    private void loadAppOpenAd() {
+        AppOpenAdEventListener appOpenAdEventListener = new AppOpenAdEventListener() {
+            @Override
+            public void onAdLoading() {
+                binding.appOpenAdStatus.setText("Loading...");
+            }
+
+            @Override
+            public void onAdLoaded() {
+                binding.appOpenAdStatus.setText("Loaded");
+                binding.appOpenShowButton.setEnabled(true);
+            }
+
+            @Override
+            public void onAdLoadFailed() {
+                binding.appOpenAdStatus.setText("Failed");
+            }
+
+            @Override
+            public void onAdShowFailed() {
+                binding.appOpenAdStatus.setText("Show failed");
+                binding.appOpenShowButton.setEnabled(false);
+            }
+
+            @Override
+            public void onAdOpened() {
+                binding.appOpenAdStatus.setText("Opened");
+                binding.appOpenShowButton.setEnabled(false);
+            }
+
+            @Override
+            public void onAdClosed() {
+                binding.appOpenAdStatus.setText("Closed");
+            }
+        };
+
+        appOpenAd.setAppOpenAdEventListener(appOpenAdEventListener).loadAd(this, true);
+    }
+
+    private void showAppOpenAd() {
+        appOpenAd.showAd(this, true);
     }
 
     private void loadBannerAd() {
