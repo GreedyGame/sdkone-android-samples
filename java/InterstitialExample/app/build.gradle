@@ -47,7 +47,7 @@ dependencies {
 
 
     //SDKOne dependency
-    implementation 'com.pubscale.sdkone:core:0.03-rc12'
+    implementation 'com.pubscale.sdkone:core:0.03'
 
     //Dependencies required by SDKOne
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
