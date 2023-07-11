@@ -18,7 +18,13 @@ Checkout the documentation below.
 - Rewarded: [Java](https://github.com/GreedyGame/sdkone-android-samples/tree/main/java/RewardedExample), [Kotlin](https://github.com/GreedyGame/sdkone-android-samples/tree/main/kotlin/RewardedExample)
 - Native: [Java](https://github.com/GreedyGame/sdkone-android-samples/tree/main/java/NativeExample), [Kotlin](https://github.com/GreedyGame/sdkone-android-samples/tree/main/kotlin/NativeExample)
 - RecyclerViewAdAdapter: [Java](https://github.com/GreedyGame/sdkone-android-samples/tree/main/java/RecyclerViewAdapterExample), [Kotlin](https://github.com/GreedyGame/sdkone-android-samples/tree/main/kotlin/RecyclerViewAdapterExample)
-- A/BTest: [Java](https://github.com/GreedyGame/sdkone-android-samples/tree/main/java/ABTestExample), [Kotlin](https://github.com/GreedyGame/sdkone-android-samples/tree/main/kotlin/ABTestExample)
+
+
+<br>
+
+## A/B Testing between SDKOne and Admob
+- [Documentation](https://drive.google.com/file/d/1DnyZNbUbO-K-mxhH5J-LSOJIML1MAOKE/view?usp=sharing)
+- Sample: [Java](https://github.com/GreedyGame/sdkone-android-samples/tree/main/java/ABTestExample), [Kotlin](https://github.com/GreedyGame/sdkone-android-samples/tree/main/kotlin/ABTestExample)
 
 <br>
 
