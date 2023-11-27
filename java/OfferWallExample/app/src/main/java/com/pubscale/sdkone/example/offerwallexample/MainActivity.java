@@ -51,8 +51,8 @@ public class MainActivity extends AppCompatActivity {
         String appKey = "f53e007b-a86c-436d-a7d3-40176ccab173";
 
         OfferWallConfig offerWallConfig = new OfferWallConfig.Builder(getApplicationContext(), appKey)
-                .setTitle("Title of your offer wall")
                 .setUniqueId(uniqueIdTyped)
+                .setFullscreenEnabled(true)
                 .build();
 
         OfferWall.init(offerWallConfig, new OfferWallInitListener() {

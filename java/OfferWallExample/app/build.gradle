@@ -46,5 +46,5 @@ dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.21'
 
     //Offerwall
-    implementation 'com.pubscale.sdkone:offerwall:0.01'
+    implementation 'com.pubscale.sdkone:offerwall:1.0.5'
 }
