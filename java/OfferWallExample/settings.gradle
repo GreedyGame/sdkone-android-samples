@@ -10,6 +10,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url "https://storage.googleapis.com/caterpillar-libs-bucket/" }
     }
 }
 rootProject.name = "OfferWallExample"
