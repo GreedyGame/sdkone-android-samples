@@ -48,8 +48,8 @@ class MainActivity : AppCompatActivity() {
         val appKey = "f53e007b-a86c-436d-a7d3-40176ccab173"
 
         val offerWallConfig = OfferWallConfig.Builder(this, appKey)
-            .setTitle("Title of your offer wall")
             .setUniqueId(uniqueIdTyped)
+            .setFullscreenEnabled(true)
             .build()
 
         OfferWall.init(offerWallConfig, object: OfferWallInitListener {
